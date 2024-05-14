@@ -1,0 +1,27 @@
+{
+  "name": "vendure-banner",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev:server": "ts-node ./src/index.ts",
+    "dev:worker": "ts-node ./src/index-worker.ts",
+    "dev": "concurrently npm:dev:*",
+    "build": "tsc",
+    "start:server": "node ./dist/index.js",
+    "start:worker": "node ./dist/index-worker.js",
+    "start": "concurrently npm:start:*"
+  },
+  "dependencies": {
+    "@vendure/admin-ui-plugin": "2.2.4",
+    "@vendure/asset-server-plugin": "2.2.4",
+    "@vendure/core": "2.2.4",
+    "@vendure/email-plugin": "2.2.4",
+    "better-sqlite3": "9.6.0",
+    "dotenv": "16.4.5",
+    "typescript": "5.3.3"
+  },
+  "devDependencies": {
+    "@vendure/cli": "2.2.4",
+    "concurrently": "8.2.2"
+  }
+}
