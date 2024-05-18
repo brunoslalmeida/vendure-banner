@@ -11,8 +11,6 @@ import { AdminUiPlugin } from '@vendure/admin-ui-plugin';
 import 'dotenv/config';
 import path from 'path';
 import { BannerPlugin } from './plugins/banner/banner.plugin';
-import { MyNewFeatureasdPlugin } from './plugins/my-new-featureasd/my-new-featureasd.plugin';
-import { MyNewFeaturePlugin } from './plugins/my-new-feature/my-new-feature.plugin';
 
 const IS_DEV = process.env.APP_ENV === 'dev';
 

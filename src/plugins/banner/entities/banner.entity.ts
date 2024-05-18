@@ -5,9 +5,10 @@ import {
   Translation,
   VendureEntity,
 } from "@vendure/core";
-import { Column, Entity, OneToMany } from "typeorm";
+import { Column, Entity, OneToMany, JoinTable } from "typeorm";
 
 import { BannerTranslation } from "./banner-translation.entity";
+import { BannerItem } from "./banner-item.entity";
 
 @Entity()
 export class Banner extends VendureEntity implements Translatable {
@@ -23,4 +24,11 @@ export class Banner extends VendureEntity implements Translatable {
     eager: true,
   })
   translations: Array<Translation<Banner>>;
+
+  @Column({ nullable: false, unique: true })
+  slug: string;
+
+  @OneToMany(() => BannerItem, (entity) => entity.banner)
+  @JoinTable()
+  items: BannerItem[];
 }
