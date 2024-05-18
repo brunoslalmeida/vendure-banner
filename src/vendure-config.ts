@@ -1,3 +1,4 @@
+import { compileUiExtensions } from '@vendure/ui-devkit/compiler';
 import {
     dummyPaymentHandler,
     DefaultJobQueuePlugin,
@@ -9,6 +10,9 @@ import { AssetServerPlugin } from '@vendure/asset-server-plugin';
 import { AdminUiPlugin } from '@vendure/admin-ui-plugin';
 import 'dotenv/config';
 import path from 'path';
+import { BannerPlugin } from './plugins/banner/banner.plugin';
+import { MyNewFeatureasdPlugin } from './plugins/my-new-featureasd/my-new-featureasd.plugin';
+import { MyNewFeaturePlugin } from './plugins/my-new-feature/my-new-feature.plugin';
 
 const IS_DEV = process.env.APP_ENV === 'dev';
 
@@ -88,6 +92,15 @@ export const config: VendureConfig = {
             adminUiConfig: {
                 apiPort: 3000,
             },
+            app: compileUiExtensions({
+                outputPath: path.join(__dirname, '../admin-ui'),
+                extensions: [
+                    BannerPlugin.ui,
+                    BannerPlugin.ui,
+                ],
+                devMode: true,
+            }),
         }),
+        BannerPlugin.init({}),
     ],
 };
