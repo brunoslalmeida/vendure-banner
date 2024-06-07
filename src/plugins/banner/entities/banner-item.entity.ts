@@ -9,8 +9,7 @@ import {
 } from "@vendure/core";
 import { Column, Entity, OneToMany, ManyToOne, JoinTable } from "typeorm";
 
-import { BannerItemTranslation } from "./banner-item-translation.entity";
-import { Banner } from "./banner.entity";
+import { Banner, BannerItemTranslation } from ".";
 
 @Entity()
 export class BannerItem extends VendureEntity implements Translatable {

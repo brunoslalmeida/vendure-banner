@@ -36,8 +36,8 @@ export const config: VendureConfig = {
     authOptions: {
         tokenMethod: ['bearer', 'cookie'],
         superadminCredentials: {
-            identifier: process.env.SUPERADMIN_USERNAME,
-            password: process.env.SUPERADMIN_PASSWORD,
+            identifier: 'admin',
+            password: 'admin',
         },
         cookieOptions: {
           secret: process.env.COOKIE_SECRET,

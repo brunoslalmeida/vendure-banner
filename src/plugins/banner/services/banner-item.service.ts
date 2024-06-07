@@ -59,6 +59,31 @@ export class BannerItemService {
             );
     }
 
+    findAllFromBanner(
+        ctx: RequestContext,
+        banner: ID,
+        options?: ListQueryOptions<BannerItem>,
+        relations?: RelationPaths<BannerItem>
+      ): Promise<PaginatedList<Translated<BannerItem>>> {
+        return this.listQueryBuilder
+          .build(BannerItem, options, {
+            relations,
+            ctx,
+            where: {
+              banner: {
+                id: banner,
+              },
+            },
+          })
+          .getManyAndCount()
+          .then(([items, totalItems]) => {
+            return {
+              items: items.map((item) => this.translator.translate(item, ctx)),
+              totalItems,
+            };
+          });
+      }
+
     findOne(
         ctx: RequestContext,
         id: ID,

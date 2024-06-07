@@ -3,7 +3,7 @@ import { DeepPartial } from '@vendure/common/lib/shared-types';
 import { Translation, VendureEntity } from '@vendure/core';
 import { Column, Entity, Index, ManyToOne } from 'typeorm';
 
-import { BannerItem } from './banner-item.entity';
+import { BannerItem } from '.';
 
 @Entity()
 export class BannerItemTranslation
