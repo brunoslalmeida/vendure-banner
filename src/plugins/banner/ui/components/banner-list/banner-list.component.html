@@ -44,25 +44,25 @@
     <ng-template let-banner="item">{{ banner.id }}</ng-template>
   </vdr-dt2-column>
   <vdr-dt2-column
-    [sort]="sorts.get('code')"
-    [heading]="'common.code' | translate"
+    [sort]="sorts.get('slug')"
+    [heading]="'common.slug' | translate"
   >
     <ng-template let-banner="item">
       <a
         class="button-ghost"
         [routerLink]="['./', banner.id]"
       >
-        <span>{{ banner.code }}</span>
+        <span>{{ banner.slug }}</span>
         <clr-icon shape="arrow right"></clr-icon>
       </a>
     </ng-template>
+  </vdr-dt2-column>
+  <vdr-dt2-column [heading]="'banner.items' | translate">
+    <ng-template let-banner="item"> 3 </ng-template>
   </vdr-dt2-column>
   <vdr-dt2-column [heading]="'common.created-at' | translate">
     <ng-template let-banner="item">
       {{ banner.createdAt | localeDate : "short" }}
     </ng-template>
-  </vdr-dt2-column>
-  <vdr-dt2-column [heading]="'banner.items' | translate">
-    <ng-template let-banner="item"> 3 </ng-template>
   </vdr-dt2-column>
 </vdr-data-table-2>

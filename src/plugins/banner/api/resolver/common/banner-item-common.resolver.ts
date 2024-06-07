@@ -11,7 +11,6 @@ import {
 import { BannerItem } from "../../../entities";
 import { BannerItemService } from "../../../services/banner-item.service";
 
-
 @Resolver()
 export class BannerItemCommonResolver {
   constructor(private bannerItemService: BannerItemService) {}

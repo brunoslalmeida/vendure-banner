@@ -5,17 +5,13 @@ export const bannerAdminApiExtensions = gql`
     id: ID!
     createdAt: DateTime!
     updatedAt: DateTime!
-    languageCode: LanguageCode!
-    localizedName: String!
   }
 
   type Banner implements Node {
     id: ID!
     createdAt: DateTime!
     updatedAt: DateTime!
-    code: String!
-    localizedName: String!
-    translations: [BannerTranslation!]!
+    slug: String!
     items: [BannerItem]
   }
 

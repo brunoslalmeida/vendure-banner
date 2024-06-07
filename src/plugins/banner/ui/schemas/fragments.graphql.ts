@@ -35,7 +35,7 @@ export const TAGS_FRAGMENT = gql`
 export const BANNER_FRAGMENT = gql`
   fragment Banner on Banner {
     id
-    code
+    slug
     items {
       ...BannerItem
     }

@@ -308,49 +308,43 @@ export type AuthenticationResult = CurrentUser | InvalidCredentialsError;
 
 export type Banner = Node & {
   __typename?: 'Banner';
-  code: Scalars['String']['output'];
   createdAt: Scalars['DateTime']['output'];
   id: Scalars['ID']['output'];
   items?: Maybe<Array<Maybe<BannerItem>>>;
-  localizedName: Scalars['String']['output'];
-  translations: Array<BannerTranslation>;
+  slug: Scalars['String']['output'];
   updatedAt: Scalars['DateTime']['output'];
 };
 
 export type BannerFilterParameter = {
   _and?: InputMaybe<Array<BannerFilterParameter>>;
   _or?: InputMaybe<Array<BannerFilterParameter>>;
-  code?: InputMaybe<StringOperators>;
   createdAt?: InputMaybe<DateOperators>;
   id?: InputMaybe<IdOperators>;
-  localizedName?: InputMaybe<StringOperators>;
+  slug?: InputMaybe<StringOperators>;
   updatedAt?: InputMaybe<DateOperators>;
 };
 
 export type BannerItem = Node & {
   __typename?: 'BannerItem';
   asset: Asset;
-  code: Scalars['String']['output'];
   createdAt: Scalars['DateTime']['output'];
   end?: Maybe<Scalars['DateTime']['output']>;
   id: Scalars['ID']['output'];
   link: Scalars['String']['output'];
-  localizedName: Scalars['String']['output'];
   mobile?: Maybe<Asset>;
+  slug: Scalars['String']['output'];
   start: Scalars['DateTime']['output'];
-  translations: Array<BannerItemTranslation>;
   updatedAt: Scalars['DateTime']['output'];
 };
 
 export type BannerItemFilterParameter = {
   _and?: InputMaybe<Array<BannerItemFilterParameter>>;
   _or?: InputMaybe<Array<BannerItemFilterParameter>>;
-  code?: InputMaybe<StringOperators>;
   createdAt?: InputMaybe<DateOperators>;
   end?: InputMaybe<DateOperators>;
   id?: InputMaybe<IdOperators>;
   link?: InputMaybe<StringOperators>;
-  localizedName?: InputMaybe<StringOperators>;
+  slug?: InputMaybe<StringOperators>;
   start?: InputMaybe<DateOperators>;
   updatedAt?: InputMaybe<DateOperators>;
 };
@@ -375,12 +369,11 @@ export type BannerItemListOptions = {
 };
 
 export type BannerItemSortParameter = {
-  code?: InputMaybe<SortOrder>;
   createdAt?: InputMaybe<SortOrder>;
   end?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   link?: InputMaybe<SortOrder>;
-  localizedName?: InputMaybe<SortOrder>;
+  slug?: InputMaybe<SortOrder>;
   start?: InputMaybe<SortOrder>;
   updatedAt?: InputMaybe<SortOrder>;
 };
@@ -396,8 +389,6 @@ export type BannerItemTranslation = {
 
 export type BannerItemTranslationInput = {
   id?: InputMaybe<Scalars['ID']['input']>;
-  languageCode: LanguageCode;
-  localizedName?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type BannerList = PaginatedList & {
@@ -420,10 +411,9 @@ export type BannerListOptions = {
 };
 
 export type BannerSortParameter = {
-  code?: InputMaybe<SortOrder>;
   createdAt?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
-  localizedName?: InputMaybe<SortOrder>;
+  slug?: InputMaybe<SortOrder>;
   updatedAt?: InputMaybe<SortOrder>;
 };
 
@@ -431,15 +421,11 @@ export type BannerTranslation = {
   __typename?: 'BannerTranslation';
   createdAt: Scalars['DateTime']['output'];
   id: Scalars['ID']['output'];
-  languageCode: LanguageCode;
-  localizedName: Scalars['String']['output'];
   updatedAt: Scalars['DateTime']['output'];
 };
 
 export type BannerTranslationInput = {
   id?: InputMaybe<Scalars['ID']['input']>;
-  languageCode: LanguageCode;
-  localizedName?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type BooleanCustomFieldConfig = CustomField & {
@@ -882,20 +868,16 @@ export type CreateAssetInput = {
 export type CreateAssetResult = Asset | MimeTypeError;
 
 export type CreateBannerInput = {
-  code: Scalars['String']['input'];
-  localizedName: Scalars['String']['input'];
-  translations: Array<BannerTranslationInput>;
+  slug: Scalars['String']['input'];
 };
 
 export type CreateBannerItemInput = {
   asset: Scalars['ID']['input'];
-  code: Scalars['String']['input'];
+  banner: Scalars['ID']['input'];
   end?: InputMaybe<Scalars['DateTime']['input']>;
   link: Scalars['String']['input'];
-  localizedName: Scalars['String']['input'];
   mobile?: InputMaybe<Scalars['ID']['input']>;
   start: Scalars['DateTime']['input'];
-  translations: Array<BannerItemTranslationInput>;
 };
 
 export type CreateChannelInput = {
@@ -2922,6 +2904,7 @@ export type Mutation = {
   deleteAssets: DeletionResponse;
   deleteBanner: DeletionResponse;
   deleteBannerItem: DeletionResponse;
+  deleteBanners: DeletionResponse;
   /** Delete a Channel */
   deleteChannel: DeletionResponse;
   /** Delete multiple Channels */
@@ -3422,6 +3405,11 @@ export type MutationDeleteBannerArgs = {
 
 export type MutationDeleteBannerItemArgs = {
   id: Scalars['ID']['input'];
+};
+
+
+export type MutationDeleteBannersArgs = {
+  id: Array<Scalars['ID']['input']>;
 };
 
 
@@ -6519,20 +6507,18 @@ export type UpdateAssetInput = {
 };
 
 export type UpdateBannerInput = {
-  code?: InputMaybe<Scalars['String']['input']>;
   id: Scalars['ID']['input'];
-  localizedName?: InputMaybe<Scalars['String']['input']>;
-  translations?: InputMaybe<Array<BannerTranslationInput>>;
+  slug: Scalars['String']['input'];
 };
 
 export type UpdateBannerItemInput = {
-  code?: InputMaybe<Scalars['String']['input']>;
+  asset: Scalars['ID']['input'];
+  banner: Scalars['ID']['input'];
   end?: InputMaybe<Scalars['DateTime']['input']>;
   id: Scalars['ID']['input'];
-  link?: InputMaybe<Scalars['String']['input']>;
-  localizedName?: InputMaybe<Scalars['String']['input']>;
-  start?: InputMaybe<Scalars['DateTime']['input']>;
-  translations?: InputMaybe<Array<BannerItemTranslationInput>>;
+  link: Scalars['String']['input'];
+  mobile?: InputMaybe<Scalars['ID']['input']>;
+  start: Scalars['DateTime']['input'];
 };
 
 export type UpdateChannelInput = {

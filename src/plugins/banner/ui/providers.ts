@@ -5,7 +5,7 @@ export default [
     {
       id: "banner",
       label: "Banners",
-      routerLink: ["/extensions/banner"],
+      routerLink: ["/extensions/banners"],
       icon: "image-gallery",
     },
     "marketing"

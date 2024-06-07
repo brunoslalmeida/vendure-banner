@@ -3,29 +3,25 @@ import gql from "graphql-tag";
 export const bannerItemAdminApiExtensions = gql`
   input BannerItemTranslationInput {
     id: ID    
-    languageCode: LanguageCode!
-    localizedName: String
   }
 
   input CreateBannerItemInput {
-    code: String!
-    localizedName: String!
     start: DateTime!
     end: DateTime
     link: String!
     asset: ID!
     mobile: ID
-    translations: [BannerItemTranslationInput!]!
+    banner: ID!
   }
 
   input UpdateBannerItemInput {
     id: ID!
-    code: String
-    localizedName: String
-    start: DateTime
+    start: DateTime!
     end: DateTime
-    link: String
-    translations: [BannerItemTranslationInput!]
+    link: String!
+    asset: ID!
+    mobile: ID
+    banner: ID!
   }
 
   extend type Mutation {

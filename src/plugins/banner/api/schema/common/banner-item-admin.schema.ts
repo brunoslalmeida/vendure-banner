@@ -13,14 +13,12 @@ export const bannerItemAdminApiExtensions = gql`
     id: ID!
     createdAt: DateTime!
     updatedAt: DateTime!
-    code: String!
-    localizedName: String!
+    slug: String!
     start: DateTime!
     end: DateTime
     link: String!
     mobile: Asset
     asset: Asset!
-    translations: [BannerItemTranslation!]!
   }
 
   type BannerItemList implements PaginatedList {

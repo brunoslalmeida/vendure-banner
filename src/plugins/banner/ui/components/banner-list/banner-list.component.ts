@@ -17,14 +17,14 @@ export class BannerListComponent extends TypedBaseListComponent<
   readonly sorts = this.createSortCollection()
     .defaultSort("id", "DESC")
     .addSort({ name: 'id' })
-    .addSort({ name: 'code' })
+    .addSort({ name: 'slug' })
     .connectToRoute(this.route);
 
   readonly filters = this.createFilterCollection().addFilter({
-    name: 'code',
+    name: 'slug',
     type: { kind: 'text' },
-    label: 'Code',
-    filterField: 'code',
+    label: 'Slug',
+    filterField: 'slug',
   }).connectToRoute(this.route);
 
   constructor() {
@@ -37,7 +37,7 @@ export class BannerListComponent extends TypedBaseListComponent<
           skip,
           take,
           filter: {
-            code: {
+            slug: {
               contains: this.searchTermControl.value ?? undefined,
             },
             ...this.filters.createFilterInput(),

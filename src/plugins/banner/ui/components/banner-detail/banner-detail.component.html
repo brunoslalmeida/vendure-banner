@@ -1,0 +1,50 @@
+<vdr-page-body>
+  <form
+    class="form"
+    [formGroup]="detailForm"
+    (ngSubmit)="save()"
+  >
+    <vdr-page-block>
+      <vdr-action-bar>
+        <vdr-ab-right>
+          <button
+            *vdrIfPermissions="'UpdateBanner'"
+            id="submit"
+            type="submit"
+            class="button primary"
+            [disabled]="hideSubmit(detailForm)"
+          >
+            {{ (entity ? 'common.update' : 'common.create') | translate }}
+          </button>
+        </vdr-ab-right>
+      </vdr-action-bar>
+    </vdr-page-block>
+    <vdr-page-detail-layout>
+      <vdr-page-detail-sidebar>
+        <vdr-card title="Detalhes">
+          <div class="form-grid">
+            <vdr-form-field
+              label="Slug*"
+              for="slug"
+              [errors]="{ required: 'Code is required' }"
+            >
+              <input
+                id="slug"
+                type="text"
+                formControlName="slug"
+                [readonly]="!('UpdateBanner' | hasPermission) || onHttpRequest"
+                required
+              />
+            </vdr-form-field>
+          </div>
+          <vdr-card
+            *ngIf="entity$ | async as entity"
+            class="mt-4"
+          >
+            <vdr-page-entity-info [entity]="entity"></vdr-page-entity-info>
+          </vdr-card>
+        </vdr-card>
+      </vdr-page-detail-sidebar>
+    </vdr-page-detail-layout>
+  </form>
+</vdr-page-body>

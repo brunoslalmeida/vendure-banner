@@ -8,24 +8,11 @@ import {
   ID,
   RequestContext,
   Transaction,
-  TranslationInput,
 } from "@vendure/core";
 import { Banner } from "../../../entities";
 import { BannerService } from "../../../services/banner.service";
 import { BannerPermission } from "../../../constants";
-
-// These can be replaced by generated types if you set up code generation
-interface CreateBannerInput {
-  code: string;
-  // Define the input fields here
-  translations: Array<TranslationInput<Banner>>;
-}
-interface UpdateBannerInput {
-  id: ID;
-  code?: string;
-  // Define the input fields here
-  translations: Array<TranslationInput<Banner>>;
-}
+import { CreateBannerInput, UpdateBannerInput } from "src/generated/generated-admin-types";
 
 @Resolver()
 export class BannerAdminResolver {
@@ -59,5 +46,15 @@ export class BannerAdminResolver {
     @Args() args: { id: ID }
   ): Promise<DeletionResponse> {
     return this.bannerService.delete(ctx, args.id);
+  }
+
+  @Mutation()
+  @Transaction()
+  @Allow(BannerPermission.Delete)
+  async deleteBanners(
+    @Ctx() ctx: RequestContext,
+    @Args() args: { ids: [ID] }
+  ): Promise<DeletionResponse> {
+    return this.bannerService.deleteMultiple(ctx, args.ids);
   }
 }

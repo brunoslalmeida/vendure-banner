@@ -1,33 +1,17 @@
 import {
-  ID,
   Asset,
   DeepPartial,
-  LocaleString,
-  Translatable,
-  Translation,
   VendureEntity,
 } from "@vendure/core";
-import { Column, Entity, OneToMany, ManyToOne, JoinTable } from "typeorm";
+import { Column, Entity, ManyToOne, JoinTable } from "typeorm";
 
-import { Banner, BannerItemTranslation } from ".";
+import { Banner } from ".";
 
 @Entity()
-export class BannerItem extends VendureEntity implements Translatable {
+export class BannerItem extends VendureEntity  {
   constructor(input?: DeepPartial<BannerItem>) {
     super(input);
   }
-
-  @Column()
-  code: string;
-  localizedName: LocaleString;
-
-  @OneToMany(
-    (type) => BannerItemTranslation,
-    (translation) => translation.base,
-    { eager: true }
-  )
-  translations: Array<Translation<BannerItem>>;
-
   @ManyToOne(() => Asset)
   @JoinTable()
   asset: Asset;

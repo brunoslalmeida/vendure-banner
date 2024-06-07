@@ -25,7 +25,7 @@ const documents = {
     "\n  query GetBanner($id: ID!) {\n    banner(id: $id) {\n      ...Banner\n    }\n  }\n": types.GetBannerDocument,
     "\n  fragment Asset on Asset {\n    __typename\n    createdAt\n    customFields\n    fileSize\n    focalPoint {\n      x\n      y\n    }\n    height\n    id\n    mimeType\n    name\n    preview\n    source\n    type\n    updatedAt\n    width\n    tags {\n      ...Tag\n    }\n  }\n": types.AssetFragmentDoc,
     "\n  fragment Tag on Tag {\n    id\n    createdAt\n    updatedAt\n    value\n  }\n": types.TagFragmentDoc,
-    "\n  fragment Banner on Banner {\n    id\n    code\n    items {\n      ...BannerItem\n    }\n    createdAt\n    updatedAt\n  }\n": types.BannerFragmentDoc,
+    "\n  fragment Banner on Banner {\n    id\n    slug\n    items {\n      ...BannerItem\n    }\n    createdAt\n    updatedAt\n  }\n": types.BannerFragmentDoc,
     "\n  fragment BannerItem on BannerItem {\n    id\n    mobile {\n      ...Asset\n    }\n    asset {\n      ...Asset\n    }\n    end\n    link\n    start\n  }\n": types.BannerItemFragmentDoc,
 };
 
@@ -94,7 +94,7 @@ export function graphql(source: "\n  fragment Tag on Tag {\n    id\n    createdA
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  fragment Banner on Banner {\n    id\n    code\n    items {\n      ...BannerItem\n    }\n    createdAt\n    updatedAt\n  }\n"): (typeof documents)["\n  fragment Banner on Banner {\n    id\n    code\n    items {\n      ...BannerItem\n    }\n    createdAt\n    updatedAt\n  }\n"];
+export function graphql(source: "\n  fragment Banner on Banner {\n    id\n    slug\n    items {\n      ...BannerItem\n    }\n    createdAt\n    updatedAt\n  }\n"): (typeof documents)["\n  fragment Banner on Banner {\n    id\n    slug\n    items {\n      ...BannerItem\n    }\n    createdAt\n    updatedAt\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

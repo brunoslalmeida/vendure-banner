@@ -1,6 +1,10 @@
 {
   "banner": {
-    "create-banner": "Create Banner",
-    "items": "Items"
+    "items": "Items",
+    "create-banner": "Create Banner"
+  },
+  "messages": {
+    "banner-updated-success": "Banner updated successfully",
+    "banner-created-success": "Banner created successfully"
   }
 }

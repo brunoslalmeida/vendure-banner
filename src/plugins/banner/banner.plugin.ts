@@ -14,12 +14,7 @@ import {
   shopApiResolver,
 } from "./api";
 
-import {
-  Banner,
-  BannerItem,
-  BannerItemTranslation,
-  BannerTranslation,
-} from "./entities";
+import { Banner, BannerItem } from "./entities";
 
 @VendurePlugin({
   imports: [PluginCommonModule],
@@ -33,7 +28,7 @@ import {
     return config;
   },
   compatibility: "^2.0.0",
-  entities: [Banner, BannerTranslation, BannerItem, BannerItemTranslation],
+  entities: [Banner, BannerItem],
   adminApiExtensions: {
     schema: adminApiExtensions,
     resolvers: adminApiResolver,
@@ -57,7 +52,7 @@ export class BannerPlugin {
       en: path.join(__dirname, "./i18n/en.json"),
     },
     extensionPath: path.join(__dirname, "ui"),
-    routes: [{ route: "banner", filePath: "routes.ts" }],
+    routes: [{ route: "banners", filePath: "routes.ts" }],
     providers: ["providers.ts"],
   };
 }

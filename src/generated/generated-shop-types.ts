@@ -111,49 +111,43 @@ export type AuthenticationResult = CurrentUser | InvalidCredentialsError | NotVe
 
 export type Banner = Node & {
   __typename?: 'Banner';
-  code: Scalars['String']['output'];
   createdAt: Scalars['DateTime']['output'];
   id: Scalars['ID']['output'];
   items?: Maybe<Array<Maybe<BannerItem>>>;
-  localizedName: Scalars['String']['output'];
-  translations: Array<BannerTranslation>;
+  slug: Scalars['String']['output'];
   updatedAt: Scalars['DateTime']['output'];
 };
 
 export type BannerFilterParameter = {
   _and?: InputMaybe<Array<BannerFilterParameter>>;
   _or?: InputMaybe<Array<BannerFilterParameter>>;
-  code?: InputMaybe<StringOperators>;
   createdAt?: InputMaybe<DateOperators>;
   id?: InputMaybe<IdOperators>;
-  localizedName?: InputMaybe<StringOperators>;
+  slug?: InputMaybe<StringOperators>;
   updatedAt?: InputMaybe<DateOperators>;
 };
 
 export type BannerItem = Node & {
   __typename?: 'BannerItem';
   asset: Asset;
-  code: Scalars['String']['output'];
   createdAt: Scalars['DateTime']['output'];
   end?: Maybe<Scalars['DateTime']['output']>;
   id: Scalars['ID']['output'];
   link: Scalars['String']['output'];
-  localizedName: Scalars['String']['output'];
   mobile?: Maybe<Asset>;
+  slug: Scalars['String']['output'];
   start: Scalars['DateTime']['output'];
-  translations: Array<BannerItemTranslation>;
   updatedAt: Scalars['DateTime']['output'];
 };
 
 export type BannerItemFilterParameter = {
   _and?: InputMaybe<Array<BannerItemFilterParameter>>;
   _or?: InputMaybe<Array<BannerItemFilterParameter>>;
-  code?: InputMaybe<StringOperators>;
   createdAt?: InputMaybe<DateOperators>;
   end?: InputMaybe<DateOperators>;
   id?: InputMaybe<IdOperators>;
   link?: InputMaybe<StringOperators>;
-  localizedName?: InputMaybe<StringOperators>;
+  slug?: InputMaybe<StringOperators>;
   start?: InputMaybe<DateOperators>;
   updatedAt?: InputMaybe<DateOperators>;
 };
@@ -178,12 +172,11 @@ export type BannerItemListOptions = {
 };
 
 export type BannerItemSortParameter = {
-  code?: InputMaybe<SortOrder>;
   createdAt?: InputMaybe<SortOrder>;
   end?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   link?: InputMaybe<SortOrder>;
-  localizedName?: InputMaybe<SortOrder>;
+  slug?: InputMaybe<SortOrder>;
   start?: InputMaybe<SortOrder>;
   updatedAt?: InputMaybe<SortOrder>;
 };
@@ -217,10 +210,9 @@ export type BannerListOptions = {
 };
 
 export type BannerSortParameter = {
-  code?: InputMaybe<SortOrder>;
   createdAt?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
-  localizedName?: InputMaybe<SortOrder>;
+  slug?: InputMaybe<SortOrder>;
   updatedAt?: InputMaybe<SortOrder>;
 };
 
@@ -228,8 +220,6 @@ export type BannerTranslation = {
   __typename?: 'BannerTranslation';
   createdAt: Scalars['DateTime']['output'];
   id: Scalars['ID']['output'];
-  languageCode: LanguageCode;
-  localizedName: Scalars['String']['output'];
   updatedAt: Scalars['DateTime']['output'];
 };
 

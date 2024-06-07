@@ -1,0 +1,11 @@
+.input-invalid {
+  color: var(--color-error-700);
+  border-color: var(--color-error-300);
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 4px;
+}
+
+span.error-message {
+  color: var(--color-error-700);
+}

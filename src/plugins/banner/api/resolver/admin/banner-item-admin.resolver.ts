@@ -1,42 +1,18 @@
-import { Args, Mutation, Query, Resolver } from "@nestjs/graphql";
+import { Args, Mutation, Resolver } from "@nestjs/graphql";
 import {
   DeletionResponse,
-  Permission,
 } from "@vendure/common/lib/generated-types";
 import {
   Allow,
   Ctx,
   ID,
-  ListQueryOptions,
-  PaginatedList,
-  RelationPaths,
-  Relations,
   RequestContext,
   Transaction,
-  TranslationInput,
 } from "@vendure/core";
 import { BannerItem } from "../../../entities";
 import { BannerItemService } from "../../../services/banner-item.service";
 import { BannerItemPermission } from "../../../constants";
-
-// These can be replaced by generated types if you set up code generation
-interface CreateBannerItemInput {
-  code: string;
-  start: Date;
-  end?: Date;
-  link: string;
-  // Define the input fields here
-  translations: Array<TranslationInput<BannerItem>>;
-}
-interface UpdateBannerItemInput {
-  id: ID;
-  code?: string;
-  start?: Date;
-  end?: Date;
-  link?: string;
-  // Define the input fields here
-  translations: Array<TranslationInput<BannerItem>>;
-}
+import { CreateBannerItemInput, UpdateBannerItemInput } from "src/generated/generated-admin-types";
 
 @Resolver()
 export class BannerItemAdminResolver {
