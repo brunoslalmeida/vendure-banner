@@ -1,6 +1,6 @@
 import {MigrationInterface, QueryRunner} from "typeorm";
 
-export class Banner1717718273675 implements MigrationInterface {
+export class Initial1717722142690 implements MigrationInterface {
 
    public async up(queryRunner: QueryRunner): Promise<any> {
         await queryRunner.query(`CREATE TABLE "authentication_method" ("createdAt" datetime NOT NULL DEFAULT (datetime('now')), "updatedAt" datetime NOT NULL DEFAULT (datetime('now')), "identifier" varchar, "passwordHash" varchar, "verificationToken" varchar, "passwordResetToken" varchar, "identifierChangeToken" varchar, "pendingIdentifier" varchar, "strategy" varchar, "externalIdentifier" varchar, "metadata" text, "id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "type" varchar NOT NULL, "userId" integer)`, undefined);
@@ -140,12 +140,6 @@ export class Banner1717718273675 implements MigrationInterface {
         await queryRunner.query(`CREATE INDEX "IDX_9a5a6a556f75c4ac7bfdd03410" ON "search_index_item" ("description") `, undefined);
         await queryRunner.query(`CREATE TABLE "job_record_buffer" ("createdAt" datetime NOT NULL DEFAULT (datetime('now')), "updatedAt" datetime NOT NULL DEFAULT (datetime('now')), "bufferId" varchar NOT NULL, "job" text NOT NULL, "id" integer PRIMARY KEY AUTOINCREMENT NOT NULL)`, undefined);
         await queryRunner.query(`CREATE TABLE "job_record" ("createdAt" datetime NOT NULL DEFAULT (datetime('now')), "updatedAt" datetime NOT NULL DEFAULT (datetime('now')), "queueName" varchar NOT NULL, "data" text, "state" varchar NOT NULL, "progress" integer NOT NULL, "result" text, "error" varchar, "startedAt" datetime(6), "settledAt" datetime(6), "isSettled" boolean NOT NULL, "retries" integer NOT NULL, "attempts" integer NOT NULL, "id" integer PRIMARY KEY AUTOINCREMENT NOT NULL)`, undefined);
-        await queryRunner.query(`CREATE TABLE "banner_translation" ("createdAt" datetime NOT NULL DEFAULT (datetime('now')), "updatedAt" datetime NOT NULL DEFAULT (datetime('now')), "languageCode" varchar NOT NULL, "localizedName" varchar NOT NULL, "id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "baseId" integer)`, undefined);
-        await queryRunner.query(`CREATE INDEX "IDX_1975d4afd1adec4036f5db0428" ON "banner_translation" ("baseId") `, undefined);
-        await queryRunner.query(`CREATE TABLE "banner_item_translation" ("createdAt" datetime NOT NULL DEFAULT (datetime('now')), "updatedAt" datetime NOT NULL DEFAULT (datetime('now')), "languageCode" varchar NOT NULL, "localizedName" varchar NOT NULL, "id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "baseId" integer)`, undefined);
-        await queryRunner.query(`CREATE INDEX "IDX_0cc836ed74745d8d11c4ee9e96" ON "banner_item_translation" ("baseId") `, undefined);
-        await queryRunner.query(`CREATE TABLE "banner_item" ("createdAt" datetime NOT NULL DEFAULT (datetime('now')), "updatedAt" datetime NOT NULL DEFAULT (datetime('now')), "code" varchar NOT NULL, "start" datetime NOT NULL, "end" datetime, "link" varchar NOT NULL, "id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "assetId" integer, "mobileId" integer, "bannerId" integer)`, undefined);
-        await queryRunner.query(`CREATE TABLE "banner" ("createdAt" datetime NOT NULL DEFAULT (datetime('now')), "updatedAt" datetime NOT NULL DEFAULT (datetime('now')), "code" varchar NOT NULL, "slug" varchar NOT NULL, "id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, CONSTRAINT "UQ_5e888b030b21515eb2aecb3a00d" UNIQUE ("slug"))`, undefined);
         await queryRunner.query(`CREATE TABLE "collection_product_variants_product_variant" ("collectionId" integer NOT NULL, "productVariantId" integer NOT NULL, PRIMARY KEY ("collectionId", "productVariantId"))`, undefined);
         await queryRunner.query(`CREATE INDEX "IDX_6faa7b72422d9c4679e2f186ad" ON "collection_product_variants_product_variant" ("collectionId") `, undefined);
         await queryRunner.query(`CREATE INDEX "IDX_fb05887e2867365f236d7dd95e" ON "collection_product_variants_product_variant" ("productVariantId") `, undefined);
@@ -530,22 +524,6 @@ export class Banner1717718273675 implements MigrationInterface {
         await queryRunner.query(`CREATE INDEX "IDX_43ac602f839847fdb91101f30e" ON "history_entry" ("customerId") `, undefined);
         await queryRunner.query(`CREATE INDEX "IDX_3a05127e67435b4d2332ded7c9" ON "history_entry" ("orderId") `, undefined);
         await queryRunner.query(`CREATE INDEX "IDX_f3a761f6bcfabb474b11e1e51f" ON "history_entry" ("discriminator") `, undefined);
-        await queryRunner.query(`DROP INDEX "IDX_1975d4afd1adec4036f5db0428"`, undefined);
-        await queryRunner.query(`CREATE TABLE "temporary_banner_translation" ("createdAt" datetime NOT NULL DEFAULT (datetime('now')), "updatedAt" datetime NOT NULL DEFAULT (datetime('now')), "languageCode" varchar NOT NULL, "localizedName" varchar NOT NULL, "id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "baseId" integer, CONSTRAINT "FK_1975d4afd1adec4036f5db04280" FOREIGN KEY ("baseId") REFERENCES "banner" ("id") ON DELETE CASCADE ON UPDATE NO ACTION)`, undefined);
-        await queryRunner.query(`INSERT INTO "temporary_banner_translation"("createdAt", "updatedAt", "languageCode", "localizedName", "id", "baseId") SELECT "createdAt", "updatedAt", "languageCode", "localizedName", "id", "baseId" FROM "banner_translation"`, undefined);
-        await queryRunner.query(`DROP TABLE "banner_translation"`, undefined);
-        await queryRunner.query(`ALTER TABLE "temporary_banner_translation" RENAME TO "banner_translation"`, undefined);
-        await queryRunner.query(`CREATE INDEX "IDX_1975d4afd1adec4036f5db0428" ON "banner_translation" ("baseId") `, undefined);
-        await queryRunner.query(`DROP INDEX "IDX_0cc836ed74745d8d11c4ee9e96"`, undefined);
-        await queryRunner.query(`CREATE TABLE "temporary_banner_item_translation" ("createdAt" datetime NOT NULL DEFAULT (datetime('now')), "updatedAt" datetime NOT NULL DEFAULT (datetime('now')), "languageCode" varchar NOT NULL, "localizedName" varchar NOT NULL, "id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "baseId" integer, CONSTRAINT "FK_0cc836ed74745d8d11c4ee9e960" FOREIGN KEY ("baseId") REFERENCES "banner_item" ("id") ON DELETE CASCADE ON UPDATE NO ACTION)`, undefined);
-        await queryRunner.query(`INSERT INTO "temporary_banner_item_translation"("createdAt", "updatedAt", "languageCode", "localizedName", "id", "baseId") SELECT "createdAt", "updatedAt", "languageCode", "localizedName", "id", "baseId" FROM "banner_item_translation"`, undefined);
-        await queryRunner.query(`DROP TABLE "banner_item_translation"`, undefined);
-        await queryRunner.query(`ALTER TABLE "temporary_banner_item_translation" RENAME TO "banner_item_translation"`, undefined);
-        await queryRunner.query(`CREATE INDEX "IDX_0cc836ed74745d8d11c4ee9e96" ON "banner_item_translation" ("baseId") `, undefined);
-        await queryRunner.query(`CREATE TABLE "temporary_banner_item" ("createdAt" datetime NOT NULL DEFAULT (datetime('now')), "updatedAt" datetime NOT NULL DEFAULT (datetime('now')), "code" varchar NOT NULL, "start" datetime NOT NULL, "end" datetime, "link" varchar NOT NULL, "id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "assetId" integer, "mobileId" integer, "bannerId" integer, CONSTRAINT "FK_daf20aba251c246fb02fe2a52dc" FOREIGN KEY ("assetId") REFERENCES "asset" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION, CONSTRAINT "FK_cd55c4d470a2be0dc1cdeb55d37" FOREIGN KEY ("mobileId") REFERENCES "asset" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION, CONSTRAINT "FK_e2d9d9feadbfd6f4e348fe1220f" FOREIGN KEY ("bannerId") REFERENCES "banner" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION)`, undefined);
-        await queryRunner.query(`INSERT INTO "temporary_banner_item"("createdAt", "updatedAt", "code", "start", "end", "link", "id", "assetId", "mobileId", "bannerId") SELECT "createdAt", "updatedAt", "code", "start", "end", "link", "id", "assetId", "mobileId", "bannerId" FROM "banner_item"`, undefined);
-        await queryRunner.query(`DROP TABLE "banner_item"`, undefined);
-        await queryRunner.query(`ALTER TABLE "temporary_banner_item" RENAME TO "banner_item"`, undefined);
         await queryRunner.query(`DROP INDEX "IDX_6faa7b72422d9c4679e2f186ad"`, undefined);
         await queryRunner.query(`DROP INDEX "IDX_fb05887e2867365f236d7dd95e"`, undefined);
         await queryRunner.query(`CREATE TABLE "temporary_collection_product_variants_product_variant" ("collectionId" integer NOT NULL, "productVariantId" integer NOT NULL, CONSTRAINT "FK_6faa7b72422d9c4679e2f186ad1" FOREIGN KEY ("collectionId") REFERENCES "collection" ("id") ON DELETE CASCADE ON UPDATE CASCADE, CONSTRAINT "FK_fb05887e2867365f236d7dd95ee" FOREIGN KEY ("productVariantId") REFERENCES "product_variant" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION, PRIMARY KEY ("collectionId", "productVariantId"))`, undefined);
@@ -933,22 +911,6 @@ export class Banner1717718273675 implements MigrationInterface {
         await queryRunner.query(`DROP TABLE "temporary_collection_product_variants_product_variant"`, undefined);
         await queryRunner.query(`CREATE INDEX "IDX_fb05887e2867365f236d7dd95e" ON "collection_product_variants_product_variant" ("productVariantId") `, undefined);
         await queryRunner.query(`CREATE INDEX "IDX_6faa7b72422d9c4679e2f186ad" ON "collection_product_variants_product_variant" ("collectionId") `, undefined);
-        await queryRunner.query(`ALTER TABLE "banner_item" RENAME TO "temporary_banner_item"`, undefined);
-        await queryRunner.query(`CREATE TABLE "banner_item" ("createdAt" datetime NOT NULL DEFAULT (datetime('now')), "updatedAt" datetime NOT NULL DEFAULT (datetime('now')), "code" varchar NOT NULL, "start" datetime NOT NULL, "end" datetime, "link" varchar NOT NULL, "id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "assetId" integer, "mobileId" integer, "bannerId" integer)`, undefined);
-        await queryRunner.query(`INSERT INTO "banner_item"("createdAt", "updatedAt", "code", "start", "end", "link", "id", "assetId", "mobileId", "bannerId") SELECT "createdAt", "updatedAt", "code", "start", "end", "link", "id", "assetId", "mobileId", "bannerId" FROM "temporary_banner_item"`, undefined);
-        await queryRunner.query(`DROP TABLE "temporary_banner_item"`, undefined);
-        await queryRunner.query(`DROP INDEX "IDX_0cc836ed74745d8d11c4ee9e96"`, undefined);
-        await queryRunner.query(`ALTER TABLE "banner_item_translation" RENAME TO "temporary_banner_item_translation"`, undefined);
-        await queryRunner.query(`CREATE TABLE "banner_item_translation" ("createdAt" datetime NOT NULL DEFAULT (datetime('now')), "updatedAt" datetime NOT NULL DEFAULT (datetime('now')), "languageCode" varchar NOT NULL, "localizedName" varchar NOT NULL, "id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "baseId" integer)`, undefined);
-        await queryRunner.query(`INSERT INTO "banner_item_translation"("createdAt", "updatedAt", "languageCode", "localizedName", "id", "baseId") SELECT "createdAt", "updatedAt", "languageCode", "localizedName", "id", "baseId" FROM "temporary_banner_item_translation"`, undefined);
-        await queryRunner.query(`DROP TABLE "temporary_banner_item_translation"`, undefined);
-        await queryRunner.query(`CREATE INDEX "IDX_0cc836ed74745d8d11c4ee9e96" ON "banner_item_translation" ("baseId") `, undefined);
-        await queryRunner.query(`DROP INDEX "IDX_1975d4afd1adec4036f5db0428"`, undefined);
-        await queryRunner.query(`ALTER TABLE "banner_translation" RENAME TO "temporary_banner_translation"`, undefined);
-        await queryRunner.query(`CREATE TABLE "banner_translation" ("createdAt" datetime NOT NULL DEFAULT (datetime('now')), "updatedAt" datetime NOT NULL DEFAULT (datetime('now')), "languageCode" varchar NOT NULL, "localizedName" varchar NOT NULL, "id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "baseId" integer)`, undefined);
-        await queryRunner.query(`INSERT INTO "banner_translation"("createdAt", "updatedAt", "languageCode", "localizedName", "id", "baseId") SELECT "createdAt", "updatedAt", "languageCode", "localizedName", "id", "baseId" FROM "temporary_banner_translation"`, undefined);
-        await queryRunner.query(`DROP TABLE "temporary_banner_translation"`, undefined);
-        await queryRunner.query(`CREATE INDEX "IDX_1975d4afd1adec4036f5db0428" ON "banner_translation" ("baseId") `, undefined);
         await queryRunner.query(`DROP INDEX "IDX_f3a761f6bcfabb474b11e1e51f"`, undefined);
         await queryRunner.query(`DROP INDEX "IDX_3a05127e67435b4d2332ded7c9"`, undefined);
         await queryRunner.query(`DROP INDEX "IDX_43ac602f839847fdb91101f30e"`, undefined);
@@ -1333,12 +1295,6 @@ export class Banner1717718273675 implements MigrationInterface {
         await queryRunner.query(`DROP INDEX "IDX_fb05887e2867365f236d7dd95e"`, undefined);
         await queryRunner.query(`DROP INDEX "IDX_6faa7b72422d9c4679e2f186ad"`, undefined);
         await queryRunner.query(`DROP TABLE "collection_product_variants_product_variant"`, undefined);
-        await queryRunner.query(`DROP TABLE "banner"`, undefined);
-        await queryRunner.query(`DROP TABLE "banner_item"`, undefined);
-        await queryRunner.query(`DROP INDEX "IDX_0cc836ed74745d8d11c4ee9e96"`, undefined);
-        await queryRunner.query(`DROP TABLE "banner_item_translation"`, undefined);
-        await queryRunner.query(`DROP INDEX "IDX_1975d4afd1adec4036f5db0428"`, undefined);
-        await queryRunner.query(`DROP TABLE "banner_translation"`, undefined);
         await queryRunner.query(`DROP TABLE "job_record"`, undefined);
         await queryRunner.query(`DROP TABLE "job_record_buffer"`, undefined);
         await queryRunner.query(`DROP INDEX "IDX_9a5a6a556f75c4ac7bfdd03410"`, undefined);
