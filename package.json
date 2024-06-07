@@ -9,20 +9,22 @@
     "build": "tsc",
     "start:server": "node ./dist/index.js",
     "start:worker": "node ./dist/index-worker.js",
-    "start": "concurrently npm:start:*"
+    "start": "concurrently npm:start:*",
+    "codegen": "graphql-codegen --config ./codegen.ts"
   },
   "dependencies": {
+    "@graphql-codegen/cli": "^5.0.2",
     "@vendure/admin-ui-plugin": "2.2.5",
     "@vendure/asset-server-plugin": "2.2.5",
     "@vendure/core": "2.2.5",
     "@vendure/email-plugin": "2.2.5",
+    "@vendure/ui-devkit": "2.2.5",
     "better-sqlite3": "9.6.0",
+    "concurrently": "8.2.2",
     "dotenv": "16.4.5",
     "typescript": "5.3.3"
   },
   "devDependencies": {
-    "@vendure/cli": "2.2.5",
-    "@vendure/ui-devkit": "2.2.5",
-    "concurrently": "8.2.2"
+    "@vendure/cli": "2.2.5"
   }
 }
