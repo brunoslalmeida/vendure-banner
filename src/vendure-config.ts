@@ -94,9 +94,8 @@ export const config: VendureConfig = {
                 outputPath: path.join(__dirname, '../admin-ui'),
                 extensions: [
                     BannerPlugin.ui,
-                    BannerPlugin.ui,
                 ],
-                devMode: true,
+                devMode: IS_DEV,
             }),
         }),
         BannerPlugin.init({}),

@@ -1,0 +1,68 @@
+<vdr-page-body class="mt-1 pb-1">
+  <vdr-action-bar>
+    <vdr-ab-right>
+      <vdr-action-bar-items locationId="banner-list" />
+      <ng-container>
+        <a
+          class="btn"
+          *vdrIfPermissions="['CreateBanner']"
+          [routerLink]="['./create']"
+        >
+          <clr-icon shape="plus"></clr-icon>
+          {{ "banner.create-banner" | translate }}
+        </a>
+      </ng-container>
+      <vdr-action-bar-dropdown-menu locationId="banner-list" />
+    </vdr-ab-right>
+  </vdr-action-bar>
+</vdr-page-body>
+<vdr-data-table-2
+  class="mt-2"
+  id="banner-list"
+  [items]="items$ | async"
+  [itemsPerPage]="itemsPerPage$ | async"
+  [totalItems]="totalItems$ | async"
+  [currentPage]="currentPage$ | async"
+  [filters]="filters"
+  (pageChange)="setPageNumber($event)"
+  (itemsPerPageChange)="setItemsPerPage($event)"
+>
+  <vdr-bulk-action-menu
+    locationId="banner-list"
+    [hostComponent]="this"
+    [selectionManager]="selectionManager"
+  ></vdr-bulk-action-menu>
+  <vdr-dt2-search
+    [searchTermControl]="searchTermControl"
+    searchTermPlaceholder="Filtre por slug"
+  ></vdr-dt2-search>
+  <vdr-dt2-column
+    [heading]="'common.id' | translate"
+    [sort]="sorts.get('id')"
+    [hiddenByDefault]="true"
+  >
+    <ng-template let-banner="item">{{ banner.id }}</ng-template>
+  </vdr-dt2-column>
+  <vdr-dt2-column
+    [sort]="sorts.get('code')"
+    [heading]="'common.code' | translate"
+  >
+    <ng-template let-banner="item">
+      <a
+        class="button-ghost"
+        [routerLink]="['./', banner.id]"
+      >
+        <span>{{ banner.code }}</span>
+        <clr-icon shape="arrow right"></clr-icon>
+      </a>
+    </ng-template>
+  </vdr-dt2-column>
+  <vdr-dt2-column [heading]="'common.created-at' | translate">
+    <ng-template let-banner="item">
+      {{ banner.createdAt | localeDate : "short" }}
+    </ng-template>
+  </vdr-dt2-column>
+  <vdr-dt2-column [heading]="'banner.items' | translate">
+    <ng-template let-banner="item"> 3 </ng-template>
+  </vdr-dt2-column>
+</vdr-data-table-2>

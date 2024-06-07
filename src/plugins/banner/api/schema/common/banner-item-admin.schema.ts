@@ -18,6 +18,8 @@ export const bannerItemAdminApiExtensions = gql`
     start: DateTime!
     end: DateTime
     link: String!
+    mobile: Asset
+    asset: Asset!
     translations: [BannerItemTranslation!]!
   }
 

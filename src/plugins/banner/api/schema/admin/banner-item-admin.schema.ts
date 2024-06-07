@@ -2,7 +2,7 @@ import gql from "graphql-tag";
 
 export const bannerItemAdminApiExtensions = gql`
   input BannerItemTranslationInput {
-    id: ID
+    id: ID    
     languageCode: LanguageCode!
     localizedName: String
   }
@@ -13,6 +13,8 @@ export const bannerItemAdminApiExtensions = gql`
     start: DateTime!
     end: DateTime
     link: String!
+    asset: ID!
+    mobile: ID
     translations: [BannerItemTranslationInput!]!
   }
 

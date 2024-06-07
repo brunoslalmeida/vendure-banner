@@ -1,3 +1,11 @@
+import { registerRouteComponent } from "@vendure/admin-ui/core";
+
+import { BannerListComponent } from "./components/banner-list/banner-list.component";
+
 export default [
-    // Add your custom routes here
+  registerRouteComponent({
+    path: "",
+    component: BannerListComponent,
+    breadcrumb: "Banners",
+  }),
 ];
