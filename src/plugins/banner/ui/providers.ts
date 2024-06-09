@@ -1,6 +1,8 @@
-import { addNavMenuItem } from "@vendure/admin-ui/core";
+import { addNavMenuItem, registerBulkAction } from "@vendure/admin-ui/core";
+import { DeleteBannersBulkAction } from "./bulk-actions/remove-banners";
 
 export default [
+  registerBulkAction(DeleteBannersBulkAction),
   addNavMenuItem(
     {
       id: "banner",

@@ -130,12 +130,12 @@ export type BannerFilterParameter = {
 export type BannerItem = Node & {
   __typename?: 'BannerItem';
   asset: Asset;
+  banner: Banner;
   createdAt: Scalars['DateTime']['output'];
   end?: Maybe<Scalars['DateTime']['output']>;
   id: Scalars['ID']['output'];
   link: Scalars['String']['output'];
   mobile?: Maybe<Asset>;
-  slug: Scalars['String']['output'];
   start: Scalars['DateTime']['output'];
   updatedAt: Scalars['DateTime']['output'];
 };
@@ -147,7 +147,6 @@ export type BannerItemFilterParameter = {
   end?: InputMaybe<DateOperators>;
   id?: InputMaybe<IdOperators>;
   link?: InputMaybe<StringOperators>;
-  slug?: InputMaybe<StringOperators>;
   start?: InputMaybe<DateOperators>;
   updatedAt?: InputMaybe<DateOperators>;
 };
@@ -176,18 +175,8 @@ export type BannerItemSortParameter = {
   end?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   link?: InputMaybe<SortOrder>;
-  slug?: InputMaybe<SortOrder>;
   start?: InputMaybe<SortOrder>;
   updatedAt?: InputMaybe<SortOrder>;
-};
-
-export type BannerItemTranslation = {
-  __typename?: 'BannerItemTranslation';
-  createdAt: Scalars['DateTime']['output'];
-  id: Scalars['ID']['output'];
-  languageCode: LanguageCode;
-  localizedName: Scalars['String']['output'];
-  updatedAt: Scalars['DateTime']['output'];
 };
 
 export type BannerList = PaginatedList & {

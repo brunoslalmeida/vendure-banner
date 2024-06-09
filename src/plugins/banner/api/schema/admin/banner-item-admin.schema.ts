@@ -6,8 +6,8 @@ export const bannerItemAdminApiExtensions = gql`
   }
 
   input CreateBannerItemInput {
-    start: DateTime!
-    end: DateTime
+    start: String!
+    end: String
     link: String!
     asset: ID!
     mobile: ID
@@ -16,8 +16,8 @@ export const bannerItemAdminApiExtensions = gql`
 
   input UpdateBannerItemInput {
     id: ID!
-    start: DateTime!
-    end: DateTime
+    start: String!
+    end: String
     link: String!
     asset: ID!
     mobile: ID

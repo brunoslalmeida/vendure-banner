@@ -27,7 +27,7 @@ import { Banner, BannerItem } from "./entities";
     config.authOptions.customPermissions.push(...permissions);
     return config;
   },
-  compatibility: "^2.0.0",
+  compatibility: "^2.2.5",
   entities: [Banner, BannerItem],
   adminApiExtensions: {
     schema: adminApiExtensions,
@@ -47,7 +47,7 @@ export class BannerPlugin {
   }
 
   static ui: AdminUiExtension = {
-    id: "vendure-admin-ui-banner",
+    id: "banner",
     translations: {
       en: path.join(__dirname, "./i18n/en.json"),
     },

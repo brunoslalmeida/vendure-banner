@@ -18,6 +18,7 @@ const documents = {
     "\n  mutation UpdateBannerItem($input: UpdateBannerItemInput!) {\n    updateBannerItem(input: $input) {\n      ...BannerItem\n    }\n  }\n": types.UpdateBannerItemDocument,
     "\n  query GetBannerItems($options: BannerItemListOptions) {\n    bannerItems(options: $options) {\n      items {\n        ...BannerItem\n      }\n      totalItems\n    }\n  }\n": types.GetBannerItemsDocument,
     "\n  query GetBannerItem($id: ID!) {\n    bannerItem(id: $id) {\n      ...BannerItem\n    }\n  }\n": types.GetBannerItemDocument,
+    "\n  mutation DeleteBanners($input: [ID!]!) {\n    deleteBanners(ids: $input){\n      result\n      message\n    }\n  }\n": types.DeleteBannersDocument,
     "\n  mutation DeleteBanner($input: ID!) {\n    deleteBanner(id: $input){\n      result\n      message\n    }\n  }\n": types.DeleteBannerDocument,
     "\n  mutation CreateBanner($input: CreateBannerInput!) {\n    createBanner(input: $input) {\n      ...Banner\n    }\n  }\n": types.CreateBannerDocument,
     "\n  mutation UpdateBanner($input: UpdateBannerInput!) {\n    updateBanner(input: $input) {\n      ...Banner\n    }\n  }\n": types.UpdateBannerDocument,
@@ -26,7 +27,7 @@ const documents = {
     "\n  fragment Asset on Asset {\n    __typename\n    createdAt\n    customFields\n    fileSize\n    focalPoint {\n      x\n      y\n    }\n    height\n    id\n    mimeType\n    name\n    preview\n    source\n    type\n    updatedAt\n    width\n    tags {\n      ...Tag\n    }\n  }\n": types.AssetFragmentDoc,
     "\n  fragment Tag on Tag {\n    id\n    createdAt\n    updatedAt\n    value\n  }\n": types.TagFragmentDoc,
     "\n  fragment Banner on Banner {\n    id\n    slug\n    items {\n      ...BannerItem\n    }\n    createdAt\n    updatedAt\n  }\n": types.BannerFragmentDoc,
-    "\n  fragment BannerItem on BannerItem {\n    id\n    mobile {\n      ...Asset\n    }\n    asset {\n      ...Asset\n    }\n    end\n    link\n    start\n  }\n": types.BannerItemFragmentDoc,
+    "\n  fragment BannerItem on BannerItem {\n    id\n    mobile {\n      ...Asset\n    }\n    asset {\n      ...Asset\n    }\n    end\n    link\n    start\n    banner {\n      id\n      slug\n    }\n  }\n": types.BannerItemFragmentDoc,
 };
 
 /**
@@ -66,6 +67,10 @@ export function graphql(source: "\n  query GetBannerItem($id: ID!) {\n    banner
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
+export function graphql(source: "\n  mutation DeleteBanners($input: [ID!]!) {\n    deleteBanners(ids: $input){\n      result\n      message\n    }\n  }\n"): (typeof documents)["\n  mutation DeleteBanners($input: [ID!]!) {\n    deleteBanners(ids: $input){\n      result\n      message\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
 export function graphql(source: "\n  mutation DeleteBanner($input: ID!) {\n    deleteBanner(id: $input){\n      result\n      message\n    }\n  }\n"): (typeof documents)["\n  mutation DeleteBanner($input: ID!) {\n    deleteBanner(id: $input){\n      result\n      message\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
@@ -98,7 +103,7 @@ export function graphql(source: "\n  fragment Banner on Banner {\n    id\n    sl
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  fragment BannerItem on BannerItem {\n    id\n    mobile {\n      ...Asset\n    }\n    asset {\n      ...Asset\n    }\n    end\n    link\n    start\n  }\n"): (typeof documents)["\n  fragment BannerItem on BannerItem {\n    id\n    mobile {\n      ...Asset\n    }\n    asset {\n      ...Asset\n    }\n    end\n    link\n    start\n  }\n"];
+export function graphql(source: "\n  fragment BannerItem on BannerItem {\n    id\n    mobile {\n      ...Asset\n    }\n    asset {\n      ...Asset\n    }\n    end\n    link\n    start\n    banner {\n      id\n      slug\n    }\n  }\n"): (typeof documents)["\n  fragment BannerItem on BannerItem {\n    id\n    mobile {\n      ...Asset\n    }\n    asset {\n      ...Asset\n    }\n    end\n    link\n    start\n    banner {\n      id\n      slug\n    }\n  }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

@@ -14,7 +14,7 @@
             class="button primary"
             [disabled]="hideSubmit(detailForm)"
           >
-            {{ (entity ? 'common.update' : 'common.create') | translate }}
+            {{ (entity ? "common.update" : "common.create") | translate }}
           </button>
         </vdr-ab-right>
       </vdr-action-bar>
@@ -26,7 +26,7 @@
             <vdr-form-field
               label="Slug*"
               for="slug"
-              [errors]="{ required: 'Code is required' }"
+              [errors]="{ required: 'slug is required' }"
             >
               <input
                 id="slug"
@@ -45,6 +45,17 @@
           </vdr-card>
         </vdr-card>
       </vdr-page-detail-sidebar>
+      <vdr-page-block
+        ><vdr-card title="Items">
+          <ng-container *ngIf="entity$ | async as entity">
+            <banner-item-list
+              [id]="entity?.id"
+              [update]="update"
+              (edit)="editItem($event)"
+            ></banner-item-list>
+          </ng-container>
+        </vdr-card>
+      </vdr-page-block>
     </vdr-page-detail-layout>
   </form>
 </vdr-page-body>

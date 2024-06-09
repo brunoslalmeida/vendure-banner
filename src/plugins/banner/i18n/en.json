@@ -1,10 +1,22 @@
 {
   "banner": {
-    "items": "Items",
-    "create-banner": "Create Banner"
-  },
-  "messages": {
-    "banner-updated-success": "Banner updated successfully",
-    "banner-created-success": "Banner created successfully"
+    "common": {
+      "items": "Items",
+      "create-banner": "Create Banner",
+      "starts-at-required": "Starts at*",
+      "starts-at": "Starts at",
+      "ends-at": "Ends at"
+    },
+    "messages": {
+      "generic-error": "Operation was not completed due to a unknow error",
+      "banner-updated-success": "Banner updated successfully",
+      "banner-created-success": "Banner created successfully",
+      "banner-item-expired-success": "Banner item expired successfully",
+      "banner-item-expired-failure": "Banner item was not expired",
+      "remove-banner": "Remove selected banner",
+      "confirm-bulk-delete-banners": "Delete {count} banners?",
+      "notify-bulk-delete-banner-success": "Successfully deleted {count, plural, one {1 banner} other {{count} banners}}",
+      "error-contais-banner-item": "This banner contains banner items. Remove its nested childs before deleting it."
+    }
   }
 }

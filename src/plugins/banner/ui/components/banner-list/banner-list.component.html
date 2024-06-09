@@ -9,7 +9,7 @@
           [routerLink]="['./create']"
         >
           <clr-icon shape="plus"></clr-icon>
-          {{ "banner.create-banner" | translate }}
+          {{ "banner.common.create-banner" | translate }}
         </a>
       </ng-container>
       <vdr-action-bar-dropdown-menu locationId="banner-list" />
@@ -57,8 +57,8 @@
       </a>
     </ng-template>
   </vdr-dt2-column>
-  <vdr-dt2-column [heading]="'banner.items' | translate">
-    <ng-template let-banner="item"> 3 </ng-template>
+  <vdr-dt2-column [heading]="'banner.common.items' | translate">
+    <ng-template let-banner="item"> {{banner.items.length}} </ng-template>
   </vdr-dt2-column>
   <vdr-dt2-column [heading]="'common.created-at' | translate">
     <ng-template let-banner="item">

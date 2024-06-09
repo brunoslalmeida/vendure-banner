@@ -84,15 +84,18 @@ export class BannerItemService {
   ) {
     const { link, start, end } = input;
 
+    const _end = end ? new Date(end) : undefined;
+    const _start = new Date(start);
+
     let item: BannerItem;
 
     if (input.id) {
       item = await this.connection.getEntityOrThrow(ctx, BannerItem, input.id);
-      item.end = end;
+      item.end = _end;
       item.link = link;
-      item.start = start;
+      item.start = _start;
     } else {
-      item = new BannerItem({ link, start, end });
+      item = new BannerItem({ link, start: _start, end: _end });
     }
 
     if (input.mobile)
@@ -133,7 +136,7 @@ export class BannerItemService {
     const updatedEntity = await this.connection
       .getRepository(ctx, BannerItem)
       .update(item.id, item);
-    return assertFound(this.findOne(ctx, item.id));
+    return assertFound(this.findOne(ctx, item.id, ['asset', 'mobile', 'banner']));
   }
 
   async delete(ctx: RequestContext, id: ID): Promise<DeletionResponse> {

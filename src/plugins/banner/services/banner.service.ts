@@ -38,26 +38,24 @@ export class BannerService {
     @Inject(BANNER_PLUGIN_OPTIONS) private options: PluginInitOptions
   ) {}
 
-  findAll(
+  async findAll(
     ctx: RequestContext,
     options?: ListQueryOptions<Banner>,
     relations?: RelationPaths<Banner>
   ): Promise<PaginatedList<Banner>> {
-    return this.listQueryBuilder
+    const [items, totalItems] = await this.listQueryBuilder
       .build(Banner, options, {
         relations,
         ctx,
       })
-      .getManyAndCount()
-      .then(([items, totalItems]) => {
-        return {
-          items: items,
-          totalItems,
-        };
-      });
+      .getManyAndCount();
+    return {
+      items: items,
+      totalItems,
+    };
   }
 
-  findOne(
+  async findOne(
     ctx: RequestContext,
     id: ID,
     relations?: RelationPaths<Banner>
@@ -113,7 +111,7 @@ export class BannerService {
         .remove(entities.items);
       return {
         result: DeletionResult.DELETED,
-        message: "result.length",
+        message: "" + result.length,
       };
     } catch (e: any) {
       return {

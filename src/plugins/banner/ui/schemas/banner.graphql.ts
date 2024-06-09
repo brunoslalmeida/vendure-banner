@@ -1,5 +1,13 @@
 import { graphql } from '../gql';
 
+export const DeleteBanners = graphql(`
+  mutation DeleteBanners($input: [ID!]!) {
+    deleteBanners(ids: $input){
+      result
+      message
+    }
+  }
+`);
 export const DeleteBanner = graphql(`
   mutation DeleteBanner($input: ID!) {
     deleteBanner(id: $input){

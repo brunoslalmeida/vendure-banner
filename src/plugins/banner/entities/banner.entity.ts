@@ -16,6 +16,5 @@ export class Banner extends VendureEntity  {
   slug: string;
 
   @OneToMany(() => BannerItem, (entity) => entity.banner)
-  @JoinTable()
   items: BannerItem[];
 }

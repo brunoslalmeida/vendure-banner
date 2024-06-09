@@ -2,6 +2,7 @@ import {
   OnInit,
   OnDestroy,
   Component,
+  EventEmitter,   
   ChangeDetectionStrategy,
 } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
@@ -14,13 +15,13 @@ import {
 } from "@vendure/admin-ui/core";
 
 import {
-  Banner,
   CreateBannerDocument,
   CreateBannerInput,
   GetBannerDocument,
   GetBannerQuery,
   UpdateBannerDocument,
 } from "../../gql/graphql";
+import { BannerItemListComponent } from "../banner-item-list/banner-item-list.component";
 
 @Component({
   selector: "banner-detail.component",
@@ -28,7 +29,7 @@ import {
   styleUrls: ["banner-detail.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [SharedModule],
+  imports: [SharedModule, BannerItemListComponent],
 })
 export class BannerDetailComponent
   extends TypedBaseDetailComponent<typeof GetBannerDocument, "banner">
@@ -40,6 +41,7 @@ export class BannerDetailComponent
   });
 
   onHttpRequest = false;
+  update: EventEmitter<void> = new EventEmitter<void>();
 
   constructor(
     protected dataService: DataService,
@@ -83,7 +85,7 @@ export class BannerDetailComponent
     if (id === "" || !id) {
       this.dataService.mutate(CreateBannerDocument, { input }).subscribe({
         next: (result) => {
-          this.afterSuccess("messages.banner-created-success");
+          this.afterSuccess("banner.messages.banner-created-success");
           this.router.navigate(["../", result.createBanner.id], {
             relativeTo: this.route,
           });
@@ -94,7 +96,7 @@ export class BannerDetailComponent
       this.dataService
         .mutate(UpdateBannerDocument, { input: { ...input, id } })
         .subscribe({
-          next: () => this.afterSuccess("messages.banner-updated-success"),
+          next: () => this.afterSuccess("banner.messages.banner-updated-success"),
           error: this.afterFailure,
         });
     }

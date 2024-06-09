@@ -1,0 +1,93 @@
+<vdr-action-bar-items locationId="banner-item-list"></vdr-action-bar-items>
+
+<vdr-data-table-2
+  id="banner-item-list"
+  [items]="items$ | async"
+  [itemsPerPage]="itemsPerPage$ | async"
+  [totalItems]="totalItems$ | async"
+  [currentPage]="currentPage$ | async"
+  (pageChange)="setPageNumber($event)"
+  (itemsPerPageChange)="setItemsPerPage($event)"
+>
+  <vdr-bulk-action-menu
+    locationId="banner-item-list"
+    [hostComponent]="this"
+    [selectionManager]="selectionManager"
+  ></vdr-bulk-action-menu>
+  <vdr-dt2-column
+    [sort]="sorts.get('start')"
+    [heading]="'banner.common.starts-at' | translate"
+    id="start"
+  >
+    <ng-template let-item="item">
+      {{ item.start | date : "dd/MMM/yyyy" }}
+    </ng-template>
+  </vdr-dt2-column>
+  <vdr-dt2-column
+    [sort]="sorts.get('end')"
+    [heading]="'banner.common.ends-at' | translate"
+    id="end"
+  >
+    <ng-template let-item="item">
+      {{ item.end ? (item.end | date : "dd/MMM/yyyy") : "" }}
+    </ng-template>
+  </vdr-dt2-column>
+  <vdr-dt2-column
+    [heading]="'Link'"
+    id="link"
+    [sort]="sorts.get('link')"
+  >
+    <ng-template let-item="item">
+      <a
+        class="button-ghost"
+        [href]="item.link"
+        title="{{ item.link }}"
+      >
+        {{ item.link | truncate : 35 }}
+      </a>
+    </ng-template>
+  </vdr-dt2-column>
+
+  <vdr-dt2-column
+    [heading]="'common.image' | translate"
+    id="asset"
+  >
+    <ng-template let-item="item">
+      <img [src]="item.asset.source + '?preset=small'" />
+    </ng-template>
+  </vdr-dt2-column>
+
+  <vdr-dt2-column
+    [heading]="'mobile'"
+    id="asset"
+  >
+    <ng-template let-item="item">
+      <img
+        *ngIf="item.mobile"
+        [src]="item.mobile.source + '?preset=small'"
+      />
+    </ng-template>
+  </vdr-dt2-column>
+  <vdr-dt2-column
+    [heading]="'common.edit' | translate"
+    id="asset"
+  >
+    <ng-template let-item="item">
+      <button
+        title="edit"
+        class="button"
+        (click)="editItem(item)"
+      >
+        <clr-icon shape="pencil"></clr-icon>
+      </button>
+      <button
+        title="expire"
+        class="button ml-1"
+        (click)="expireItem(item)"
+        [hidden]="item.end"
+      >
+        <clr-icon shape="clock"></clr-icon>
+      </button>
+    </ng-template>
+  </vdr-dt2-column>
+</vdr-data-table-2>

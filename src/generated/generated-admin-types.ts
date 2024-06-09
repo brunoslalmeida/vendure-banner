@@ -327,12 +327,12 @@ export type BannerFilterParameter = {
 export type BannerItem = Node & {
   __typename?: 'BannerItem';
   asset: Asset;
+  banner: Banner;
   createdAt: Scalars['DateTime']['output'];
   end?: Maybe<Scalars['DateTime']['output']>;
   id: Scalars['ID']['output'];
   link: Scalars['String']['output'];
   mobile?: Maybe<Asset>;
-  slug: Scalars['String']['output'];
   start: Scalars['DateTime']['output'];
   updatedAt: Scalars['DateTime']['output'];
 };
@@ -344,7 +344,6 @@ export type BannerItemFilterParameter = {
   end?: InputMaybe<DateOperators>;
   id?: InputMaybe<IdOperators>;
   link?: InputMaybe<StringOperators>;
-  slug?: InputMaybe<StringOperators>;
   start?: InputMaybe<DateOperators>;
   updatedAt?: InputMaybe<DateOperators>;
 };
@@ -373,18 +372,8 @@ export type BannerItemSortParameter = {
   end?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   link?: InputMaybe<SortOrder>;
-  slug?: InputMaybe<SortOrder>;
   start?: InputMaybe<SortOrder>;
   updatedAt?: InputMaybe<SortOrder>;
-};
-
-export type BannerItemTranslation = {
-  __typename?: 'BannerItemTranslation';
-  createdAt: Scalars['DateTime']['output'];
-  id: Scalars['ID']['output'];
-  languageCode: LanguageCode;
-  localizedName: Scalars['String']['output'];
-  updatedAt: Scalars['DateTime']['output'];
 };
 
 export type BannerItemTranslationInput = {
@@ -874,10 +863,10 @@ export type CreateBannerInput = {
 export type CreateBannerItemInput = {
   asset: Scalars['ID']['input'];
   banner: Scalars['ID']['input'];
-  end?: InputMaybe<Scalars['DateTime']['input']>;
+  end?: InputMaybe<Scalars['String']['input']>;
   link: Scalars['String']['input'];
   mobile?: InputMaybe<Scalars['ID']['input']>;
-  start: Scalars['DateTime']['input'];
+  start: Scalars['String']['input'];
 };
 
 export type CreateChannelInput = {
@@ -3409,7 +3398,7 @@ export type MutationDeleteBannerItemArgs = {
 
 
 export type MutationDeleteBannersArgs = {
-  id: Array<Scalars['ID']['input']>;
+  ids: Array<Scalars['ID']['input']>;
 };
 
 
@@ -6514,11 +6503,11 @@ export type UpdateBannerInput = {
 export type UpdateBannerItemInput = {
   asset: Scalars['ID']['input'];
   banner: Scalars['ID']['input'];
-  end?: InputMaybe<Scalars['DateTime']['input']>;
+  end?: InputMaybe<Scalars['String']['input']>;
   id: Scalars['ID']['input'];
   link: Scalars['String']['input'];
   mobile?: InputMaybe<Scalars['ID']['input']>;
-  start: Scalars['DateTime']['input'];
+  start: Scalars['String']['input'];
 };
 
 export type UpdateChannelInput = {

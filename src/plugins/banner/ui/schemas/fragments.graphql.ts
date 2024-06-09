@@ -56,5 +56,9 @@ export const BANNER_ITEM_FRAGMENT = gql`
     end
     link
     start
+    banner {
+      id
+      slug
+    }
   }
 `;

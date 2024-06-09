@@ -18,7 +18,7 @@ export const bannerAdminApiExtensions = gql`
     createBanner(input: CreateBannerInput!): Banner!
     updateBanner(input: UpdateBannerInput!): Banner!
     deleteBanner(id: ID!): DeletionResponse!
-    deleteBanners(id: [ID!]!): DeletionResponse!
+    deleteBanners(ids: [ID!]!): DeletionResponse!
   }
 `;
 
