@@ -15,6 +15,7 @@ import {
   TypedBaseListComponent,
 } from "@vendure/admin-ui/core";
 import {
+  Banner,
   BannerItem,
   GetBannerItemsDocument,
   UpdateBannerItemDocument,
@@ -23,7 +24,7 @@ import {
 import { Observable } from "rxjs";
 import { marker as t } from "@biesbjerg/ngx-translate-extract-marker";
 
-import { TruncatePipe } from "../../common/truncate";
+import { TruncatePipe } from "../../common";
 
 @Component({
   standalone: true,
@@ -53,6 +54,10 @@ export class BannerItemListComponent
   ngOnDestroy() {
     super.ngOnDestroy();
     if (this.update) this.update.unsubscribe();
+  }
+
+  disableExpire(item: BannerItem) {
+    return item.end && new Date(item.end) < new Date();
   }
 
   readonly filters = this.createFilterCollection()
@@ -119,7 +124,7 @@ export class BannerItemListComponent
       id: item.id,
       link: item.link,
       start: "" + new Date(item.start).toISOString(),
-      end: "" +  date.toISOString(),
+      end: "" + date.toISOString(),
       mobile: item.mobile?.id,
     };
 
@@ -127,11 +132,15 @@ export class BannerItemListComponent
 
     this.dataService.mutate(UpdateBannerItemDocument, { input }).subscribe({
       next: () => {
-        this.notificationService.success("banner.messages.banner-item-expired-success");
+        this.notificationService.success(
+          "banner.messages.banner-item-expired-success"
+        );
         this.refresh();
       },
       error: () => {
-        this.notificationService.success("banner.messages.banner-item-expired-failure");
+        this.notificationService.success(
+          "banner.messages.banner-item-expired-failure"
+        );
       },
     });
   }

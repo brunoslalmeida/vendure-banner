@@ -2893,6 +2893,7 @@ export type Mutation = {
   deleteAssets: DeletionResponse;
   deleteBanner: DeletionResponse;
   deleteBannerItem: DeletionResponse;
+  deleteBannerItems: DeletionResponse;
   deleteBanners: DeletionResponse;
   /** Delete a Channel */
   deleteChannel: DeletionResponse;
@@ -3394,6 +3395,11 @@ export type MutationDeleteBannerArgs = {
 
 export type MutationDeleteBannerItemArgs = {
   id: Scalars['ID']['input'];
+};
+
+
+export type MutationDeleteBannerItemsArgs = {
+  ids: Array<Scalars['ID']['input']>;
 };
 
 
