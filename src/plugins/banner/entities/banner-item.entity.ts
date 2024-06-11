@@ -13,7 +13,7 @@ export class BannerItem extends VendureEntity {
   asset: Asset;
 
   @ManyToOne(() => Asset, { onDelete: "SET NULL", nullable: true })
-  mobile?: Asset | null;
+  mobile!: Asset | null;
 
   @Index()
   @ManyToOne(() => Banner, (banner) => banner.items)
@@ -22,8 +22,8 @@ export class BannerItem extends VendureEntity {
   @Column({ nullable: false })
   start: Date;
 
-  @Column({ nullable: true, default: null })
-  end?: Date;
+  @Column({ nullable: true, default: null, type: Date })
+  end!: Date | null;
 
   @Column({ nullable: false })
   link: string;

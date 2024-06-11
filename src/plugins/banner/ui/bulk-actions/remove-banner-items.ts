@@ -11,7 +11,11 @@ import {
 import { EMPTY } from "rxjs";
 import { switchMap } from "rxjs/operators";
 
-import { GetBannerItemsQuery } from "../gql/graphql";
+import {
+  GetBannerItemsQuery,
+  DeleteBannerItemsDocument,
+  DeletionResult,
+} from "../gql/graphql";
 import { BannerListComponent } from "./../components/banner-list/banner-list.component";
 
 export const DeleteBannerItemsBulkAction: BulkAction<
@@ -52,17 +56,15 @@ export const DeleteBannerItemsBulkAction: BulkAction<
         const deleted = result.deleteBannerItems;
         const errors: string[] = [];
 
-        if (0 < deleted) {
+        if (deleted.result === DeletionResult.DELETED) {
           notificationService.success(
             t("banner.messages.notify-bulk-delete-banner-item-success"),
             {
-              count: deleted,
+              count: Number.parseInt("" + deleted.message),
             }
           );
-        }
-
-        if (0 < errors.length) {
-          notificationService.error(errors.join("\n"));
+        } else {
+          notificationService.error("banner.messages.generic-error");
         }
 
         hostComponent.refresh();

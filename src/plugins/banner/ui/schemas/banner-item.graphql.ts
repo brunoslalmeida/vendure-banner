@@ -8,6 +8,16 @@ export const DeleteBannerItem = graphql(`
     }
   }
 `);
+
+export const DeleteBannerItems = graphql(`
+  mutation deleteBannerItems($input: [ID!]!) {
+    deleteBannerItems(ids: $input){
+      result
+      message
+    }
+  }
+`);
+
 export const CreateBannerItem = graphql(`
   mutation CreateBannerItem($input: CreateBannerItemInput!) {
     createBannerItem(input: $input) {
@@ -41,3 +51,4 @@ export const GetBannerItem = graphql(`
     }
   }
 `);
+

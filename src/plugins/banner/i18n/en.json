@@ -1,21 +1,39 @@
 {
   "banner": {
     "common": {
+      "item-expired": "Item Expired",
+      "expire-item": "Expire Item",
+      "link": "Link",
       "items": "Items",
       "create-banner": "Create Banner",
       "starts-at-required": "Starts at*",
       "starts-at": "Starts at",
-      "ends-at": "Ends at"
+      "ends-at": "Ends at",
+      "asset-required": "Image*",
+      "mobile": "Mobile",
+      "action-update": "Update",
+      "action-add": "Add",
+      "action": "Action",
+      "actions": "Actions",
+      "update-banner-item": "Update Banner Item",
+      "add-banner-item": "Add Banner Item",
+      "pick-image": "Select Image",
+      "pick-images": "Select Images"
     },
     "messages": {
       "generic-error": "Operation was not completed due to a unknow error",
       "banner-updated-success": "Banner updated successfully",
       "banner-created-success": "Banner created successfully",
-      "banner-item-expired-success": "Banner item expired successfully",
-      "banner-item-expired-failure": "Banner item was not expired",
+      "banner-item-updated-success": "Banner Item updated successfully",
+      "banner-item-created-success": "Banner Item created successfully",
+      "banner-item-expired-success": "Banner Item expired successfully",
+      "banner-item-expired-failure": "Banner Item expiration failed",
       "remove-banner": "Remove selected banner",
-      "confirm-bulk-delete-banners": "Delete {count} banners?",
+      "remove-banner-item": "Remove selected banner item",
+      "confirm-bulk-delete-banners": "Delete {count, plural, one {1 banner} other {{count} banners}}?",
+      "confirm-bulk-delete-banner-items": "Delete {count, plural, one {1 banner item} other {{count} banner items}} ?",
       "notify-bulk-delete-banner-success": "Successfully deleted {count, plural, one {1 banner} other {{count} banners}}",
+      "notify-bulk-delete-banner-item-success": "Successfully deleted  {count, plural, one {1  banner item} other {{count} banner items}}",
       "error-contais-banner-item": "This banner contains banner items. Remove its nested childs before deleting it."
     }
   }

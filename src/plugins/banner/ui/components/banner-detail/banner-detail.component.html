@@ -2,7 +2,7 @@
   <form
     class="form"
     [formGroup]="detailForm"
-    (ngSubmit)="save()"
+    (ngSubmit)="saveBanner()"
   >
     <vdr-page-block>
       <vdr-action-bar>
@@ -45,8 +45,148 @@
           </vdr-card>
         </vdr-card>
       </vdr-page-detail-sidebar>
-      <vdr-page-block
-        ><vdr-card title="Items">
+      <vdr-page-block>
+        <vdr-card
+          title="{{
+            (item
+              ? 'banner.common.update-banner-item'
+              : 'banner.common.add-banner-item'
+            ) | translate
+          }}"
+        >
+          <form
+            *ngIf="entity$ | async as entity"
+            class="form"
+            [formGroup]="itemsForm"
+          >
+            <input
+              id="id"
+              type="hidden"
+              required
+            />
+            <div class="form-grid">
+              <vdr-form-field
+                label="{{ 'banner.common.link' | translate }}"
+                class="form-grid-span"
+                for="link"
+              >
+                <input
+                  id="link"
+                  type="text"
+                  formControlName="link"
+                  [readonly]="
+                    !('UpdateBanner' | hasPermission) || onHttpRequest
+                  "
+                  required
+                />
+              </vdr-form-field>
+            </div>
+            <div
+              class="form-grid"
+              style="margin-top: 30px"
+            >
+              <div class="form-group">
+                <label for="end">
+                  {{ "banner.common.starts-at-required" | translate }}
+                </label>
+                <div class="input-row">
+                  <vdr-datetime-picker
+                    required
+                    [ngClass]="{
+                      'input-invalid': itemsForm.controls.start.invalid
+                    }"
+                    formControlName="start"
+                  ></vdr-datetime-picker>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="end">
+                  {{ "banner.common.ends-at" | translate }}
+                </label>
+                <div class="input-row">
+                  <vdr-datetime-picker
+                    [ngClass]="{
+                      'input-invalid': itemsForm.controls.end.invalid
+                    }"
+                    formControlName="end"
+                  ></vdr-datetime-picker>
+                  <div
+                    *ngIf="
+                      itemsForm?.controls?.end?.errors?.afterStart === true
+                    "
+                  >
+                    <span class="error-message"
+                      >{{ "banner.common.form-ends-before-start" | translate }}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="form-grid"
+              style="margin-top: 30px"
+            >
+              <vdr-form-field
+                [label]="'banner.common.asset-required' | translate"
+                for="asset"
+              >
+                <image-picker-list
+                  name="asset"
+                  [multiselect]="false"
+                  (asset)="onAsset($event)"
+                  (onHttpRequest)="(onHttpRequest)"
+                  [assets]="asset"
+                  [clear]="clear"
+                  [invalid]="itemsForm.controls?.asset?.invalid"
+                ></image-picker-list>
+              </vdr-form-field>
+
+              <vdr-form-field
+                [label]="'banner.common.mobile' | translate"
+                for="mobile"
+              >
+                <image-picker-list
+                  name="mobile"
+                  [multiselect]="false"
+                  (asset)="onMobile($event)"
+                  (onHttpRequest)="(onHttpRequest)"
+                  [assets]="mobile"
+                  [clear]="clear"
+                ></image-picker-list>
+              </vdr-form-field>
+            </div>
+            <div
+              class="flex"
+              style="margin-top: 30px; justify-content: end"
+            >
+              <button
+                id="clear"
+                type="button"
+                class="button"
+                (click)="clearItemForm()"
+                style="margin-right: 10px"
+              >
+                {{ "common.cancel" | translate }}
+              </button>
+
+              <button
+                *vdrIfPermissions="'UpdateBanner'"
+                id="submit"
+                type="submit"
+                class="button primary"
+                (click)="saveItem()"
+                [disabled]="hideSubmit(itemsForm)"
+              >
+                {{
+                  (item ? "banner.common.action-update" : "banner.common.action-add")
+                    | translate
+                }}
+              </button>
+            </div>
+          </form>
+        </vdr-card>
+        <vdr-card title="Items">
           <ng-container *ngIf="entity$ | async as entity">
             <banner-item-list
               [id]="entity?.id"

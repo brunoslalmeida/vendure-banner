@@ -74,17 +74,21 @@
   >
     <ng-template let-item="item">
       <button
-        title="edit"
+        title="{{'common.edit' | translate}}"
         class="button"
         (click)="editItem(item)"
       >
         <clr-icon shape="pencil"></clr-icon>
       </button>
       <button
-        title="expire"
+        title="{{
+          (disableExpire(item)
+            ? 'banner.common.item-expired'
+            : 'banner.common.expire-item') | translate
+        }}"
         class="button ml-1"
         (click)="expireItem(item)"
-        [hidden]="item.end"
+        [disabled]="disableExpire(item)"
       >
         <clr-icon shape="clock"></clr-icon>
       </button>

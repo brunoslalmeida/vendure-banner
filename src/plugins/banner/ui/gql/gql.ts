@@ -14,6 +14,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  */
 const documents = {
     "\n  mutation deleteBannerItem($input: ID!) {\n    deleteBannerItem(id: $input){\n      result\n      message\n    }\n  }\n": types.DeleteBannerItemDocument,
+    "\n  mutation deleteBannerItems($input: [ID!]!) {\n    deleteBannerItems(ids: $input){\n      result\n      message\n    }\n  }\n": types.DeleteBannerItemsDocument,
     "\n  mutation CreateBannerItem($input: CreateBannerItemInput!) {\n    createBannerItem(input: $input) {\n      ...BannerItem\n    }\n  }\n": types.CreateBannerItemDocument,
     "\n  mutation UpdateBannerItem($input: UpdateBannerItemInput!) {\n    updateBannerItem(input: $input) {\n      ...BannerItem\n    }\n  }\n": types.UpdateBannerItemDocument,
     "\n  query GetBannerItems($options: BannerItemListOptions) {\n    bannerItems(options: $options) {\n      items {\n        ...BannerItem\n      }\n      totalItems\n    }\n  }\n": types.GetBannerItemsDocument,
@@ -48,6 +49,10 @@ export function graphql(source: string): unknown;
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  mutation deleteBannerItem($input: ID!) {\n    deleteBannerItem(id: $input){\n      result\n      message\n    }\n  }\n"): (typeof documents)["\n  mutation deleteBannerItem($input: ID!) {\n    deleteBannerItem(id: $input){\n      result\n      message\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation deleteBannerItems($input: [ID!]!) {\n    deleteBannerItems(ids: $input){\n      result\n      message\n    }\n  }\n"): (typeof documents)["\n  mutation deleteBannerItems($input: [ID!]!) {\n    deleteBannerItems(ids: $input){\n      result\n      message\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

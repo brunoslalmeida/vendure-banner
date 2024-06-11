@@ -84,7 +84,7 @@ export class BannerItemService {
   ) {
     const { link, start, end } = input;
 
-    const _end = end ? new Date(end) : undefined;
+    const _end = end ? new Date(end) : null;
     const _start = new Date(start);
 
     let item: BannerItem;
@@ -98,10 +98,9 @@ export class BannerItemService {
       item = new BannerItem({ link, start: _start, end: _end });
     }
 
-    if (input.mobile)
-      item.mobile = input.mobile
-        ? await this.connection.getEntityOrThrow(ctx, Asset, input.mobile)
-        : null;
+    item.mobile = input.mobile
+      ? await this.connection.getEntityOrThrow(ctx, Asset, input.mobile)
+      : null;
 
     item.asset = await this.connection.getEntityOrThrow(
       ctx,
@@ -125,7 +124,9 @@ export class BannerItemService {
       .getRepository(ctx, BannerItem)
       .save(item);
 
-    return assertFound(this.findOne(ctx, newEntity.id));
+    return assertFound(
+      this.findOne(ctx, newEntity.id, ["asset", "banner", "mobile"])
+    );
   }
 
   async update(
@@ -136,7 +137,9 @@ export class BannerItemService {
     const updatedEntity = await this.connection
       .getRepository(ctx, BannerItem)
       .update(item.id, item);
-    return assertFound(this.findOne(ctx, item.id, ['asset', 'mobile', 'banner']));
+    return assertFound(
+      this.findOne(ctx, item.id, ["asset", "mobile", "banner"])
+    );
   }
 
   async delete(ctx: RequestContext, id: ID): Promise<DeletionResponse> {
@@ -145,6 +148,33 @@ export class BannerItemService {
       await this.connection.getRepository(ctx, BannerItem).remove(entity);
       return {
         result: DeletionResult.DELETED,
+      };
+    } catch (e: any) {
+      return {
+        result: DeletionResult.NOT_DELETED,
+        message: e.toString(),
+      };
+    }
+  }
+
+  async deleteMultiple(
+    ctx: RequestContext,
+    ids: ID[]
+  ): Promise<DeletionResponse> {
+    const entities = await this.findAll(ctx, {
+      filter: {
+        id: {
+          in: <string[]>ids,
+        },
+      },
+    });
+    try {
+      const result = await this.connection
+        .getRepository(ctx, BannerItem)
+        .remove(entities.items);
+      return {
+        result: DeletionResult.DELETED,
+        message: "" + result.length,
       };
     } catch (e: any) {
       return {

@@ -1,0 +1,30 @@
+<div>
+  <div
+    *ngFor="let asset of assets; index as i"
+    class="asset my-2 ml-2 flex-start"
+  >
+    <clr-icon
+      class="icon"
+      shape="minus"
+      (click)="remove(i)"
+    ></clr-icon>
+    <img [src]="getImageUrl(asset, 'small')" />
+  </div>
+  <button
+    type="button"
+    *vdrIfPermissions="'UpdateBanner'"
+    (click)="selectAssets()"
+    [disabled]="onHttpRequest"
+    class="button-ghost mt-2"
+    [ngClass]="{
+      'input-invalid': invalid
+    }"
+  >
+    {{
+      multiselect
+        ? "banner.common.pick-image"
+        : ("banner.common.pick-images" | translate)
+    }}
+    <clr-icon shape="image-gallery"></clr-icon>
+  </button>
+</div>
