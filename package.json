@@ -1,6 +1,6 @@
 {
   "name": "@vendure-osct/banner-plugin",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A vendure plugin that allows you to crate banners for your ecommerce.",
   "icon": "label",
   "author": "Bruno Almeida <bruno.s.l.almeida@gmail.com>",
