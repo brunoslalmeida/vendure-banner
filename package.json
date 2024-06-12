@@ -1,6 +1,6 @@
 {
   "name": "@vendure-osct/banner-plugin",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "A vendure plugin that allows you to crate banners for your ecommerce.",
   "icon": "label",
   "author": "Bruno Almeida <bruno.s.l.almeida@gmail.com>",
@@ -15,8 +15,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "test": "echo no test yet made",
-    "ci": "rimraf dist-npm && tsc && cp -r src/ui dist",
-    "build": "tsc"
+    "build": "rimraf dist-npm && tsc && cp -r src/ui dist && cp -r src/i18n dist"
   },
   "dependencies": { 
     "@graphql-codegen/cli": "5.0.2",
