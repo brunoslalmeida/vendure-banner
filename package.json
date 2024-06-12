@@ -14,7 +14,9 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "rimraf dist-npm && tsc && cp -r src/ui dist"
+    "test": "echo no test yet made",
+    "ci": "rimraf dist-npm && tsc && cp -r src/ui dist",
+    "build": "tsc"
   },
   "dependencies": { 
     "@graphql-codegen/cli": "5.0.2",
