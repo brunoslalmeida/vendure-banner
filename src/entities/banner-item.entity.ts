@@ -10,21 +10,21 @@ export class BannerItem extends VendureEntity {
   }
 
   @ManyToOne(() => Asset)
-  asset: Asset;
+  asset!: Asset;
 
   @ManyToOne(() => Asset, { onDelete: "SET NULL", nullable: true })
   mobile!: Asset | null;
 
   @Index()
   @ManyToOne(() => Banner, (banner) => banner.items)
-  banner: Banner;
+  banner!: Banner;
 
   @Column({ nullable: false })
-  start: Date;
+  start!: Date;
 
   @Column({ nullable: true, default: null, type: Date })
   end!: Date | null;
 
   @Column({ nullable: false })
-  link: string;
+  link!: string;
 }

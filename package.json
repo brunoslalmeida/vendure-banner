@@ -1,18 +1,13 @@
 {
-  "name": "vendure-banner",
-  "version": "0.1.0",
-  "private": true,
+  "name": "@vendure-osct/banner-plugin",
+  "version": "1.0.0",
+  "private": false,
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "dev:server": "ts-node ./src/index.ts",
-    "dev:worker": "ts-node ./src/index-worker.ts",
-    "dev": "concurrently npm:dev:*",
-    "build": "tsc",
-    "start:server": "node ./dist/index.js",
-    "start:worker": "node ./dist/index-worker.js",
-    "start": "concurrently npm:start:*",
-    "codegen": "graphql-codegen --config ./codegen.ts"
+    "build": "rimraf dist-npm && tsc && cp -r src/ui dist"
   },
-  "dependencies": {
+  "dependencies": { 
     "@graphql-codegen/cli": "5.0.2",
     "@vendure/admin-ui-plugin": "2.2.5",
     "@vendure/asset-server-plugin": "2.2.5",

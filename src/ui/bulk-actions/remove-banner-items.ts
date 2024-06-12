@@ -16,7 +16,7 @@ import {
   DeleteBannerItemsDocument,
   DeletionResult,
 } from "../gql/graphql";
-import { BannerListComponent } from "./../components/banner-list/banner-list.component";
+import { BannerListComponent } from "../components/banner-list/banner-list.component";
 
 export const DeleteBannerItemsBulkAction: BulkAction<
   ItemOf<GetBannerItemsQuery, "bannerItems">,

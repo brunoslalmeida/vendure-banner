@@ -18,7 +18,7 @@ import { Banner } from "../entities";
 import {
   CreateBannerItemInput,
   UpdateBannerItemInput,
-} from "src/generated/generated-admin-types";
+} from "../generated/generated-admin-types";
 
 @Injectable()
 export class BannerItemService {

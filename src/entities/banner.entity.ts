@@ -13,8 +13,8 @@ export class Banner extends VendureEntity  {
   }
 
   @Column({ nullable: false, unique: true })
-  slug: string;
+  slug!: string;
 
   @OneToMany(() => BannerItem, (entity) => entity.banner)
-  items: BannerItem[];
+  items!: BannerItem[];
 }

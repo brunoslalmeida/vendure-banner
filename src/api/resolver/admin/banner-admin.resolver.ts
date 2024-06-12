@@ -12,7 +12,7 @@ import {
 import { Banner } from "../../../entities";
 import { BannerService } from "../../../services/banner.service";
 import { BannerPermission } from "../../../constants";
-import { CreateBannerInput, UpdateBannerInput } from "src/generated/generated-admin-types";
+import { CreateBannerInput, UpdateBannerInput } from "../../../generated/generated-admin-types";
 
 @Resolver()
 export class BannerAdminResolver {

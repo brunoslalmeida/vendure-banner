@@ -13,7 +13,7 @@ import {
   ModalService,
   AssetPickerDialogComponent,
 } from '@vendure/admin-ui/core';
-import { getImageUrl } from '../';
+import { getImageUrl } from '..';
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
 
