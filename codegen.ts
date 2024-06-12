@@ -23,11 +23,11 @@ const config: CodegenConfig = {
         maybeValue: 'T',
     },
     generates: {
-        'src/generated/generated-admin-types.ts': {
+        'src/plugins/banner/generated/generated-admin-types.ts': {
             schema: 'http://localhost:3000/admin-api',
             plugins: ['typescript'],
         },
-        'src/generated/generated-shop-types.ts': {
+        'src/plugins/banner/generated/generated-shop-types.ts': {
             schema: 'http://localhost:3000/shop-api',
             plugins: ['typescript'],
         },

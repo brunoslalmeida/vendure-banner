@@ -7,7 +7,7 @@ import { BannerItemPermission } from "../../../constants";
 import {
   CreateBannerItemInput,
   UpdateBannerItemInput,
-} from "src/generated/generated-admin-types";
+} from "../../../generated/generated-admin-types";
 
 @Resolver()
 export class BannerItemAdminResolver {

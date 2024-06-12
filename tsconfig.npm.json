@@ -1,4 +1,5 @@
 {
+  "include": ["src/plugins/banner"],
   "compilerOptions": {
     "module": "commonjs",
     "allowSyntheticDefaultImports": true,
@@ -8,10 +9,9 @@
     "strictPropertyInitialization": false,
     "target": "es2019",
     "strict": true,
-    "sourceMap": true,
+    "sourceMap": false,
     "skipLibCheck": true,
-    "outDir": "./dist",
-    "baseUrl": "./"
+    "outDir": "./dist-npm",
   },
   "exclude": ["node_modules", "migration.ts", "src/plugins/**/ui/*", "admin-ui"],
   "ts-node": {

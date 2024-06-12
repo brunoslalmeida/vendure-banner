@@ -2,6 +2,8 @@
   "name": "vendure-banner",
   "version": "0.1.0",
   "private": true,
+  "main": "dist-npm/index.js",
+  "types": "dist-npm/index.d.ts",
   "scripts": {
     "dev:server": "ts-node ./src/index.ts",
     "dev:worker": "ts-node ./src/index-worker.ts",
