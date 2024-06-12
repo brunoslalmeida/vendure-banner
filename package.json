@@ -5,7 +5,7 @@
   "icon": "label",
   "author": "Bruno Almeida <bruno.s.l.almeida@gmail.com>",
   "homepage": "https://linkedin.com/in/brunoslalmeida",
-  "repository": "https://github.com/Pinelab-studio/pinelab-vendure-plugins",
+  "repository": "https://github.com/brunoslalmeida/vendure-banner",
   "license": "MIT",
   "private": false,
   "publishConfig": {
