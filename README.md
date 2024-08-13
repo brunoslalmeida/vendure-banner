@@ -4,7 +4,7 @@ This plugin allows you to create Banners to your
 
 ## Getting started
 ``` shell
-npm i @vendure-osct/banner-plugin
+npm i @grupo-loja/banner-plugin
 ```
 1. Add the plugin to your `vendure-config.ts`:
 
